@@ -34,5 +34,5 @@ $ docker pull akarita/docker-ubuntu-desktop
 $ docker build . -t docker-ubuntu-desktop
 ```
 
-## License
+## Licenses
 MIT License (c) 2023 [Takahashi Akari](https://github.com/takahashi-akari)
