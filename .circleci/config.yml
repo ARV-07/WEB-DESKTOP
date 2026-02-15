@@ -1,20 +1,17 @@
 version: 2.1
 
-jobs:
-  build-job:
-    docker:
-      - image: ubuntu:22.04
-
-    steps:
-      - checkout
-      - run:
-          name: Install Node
-          command: |
-            apt update
-            apt install -y nodejs
-            node -v
+orbs:
+  aws-ecr: circleci/aws-ecr@9.4.0
+  aws-cli: circleci/aws-cli@5.1
 
 workflows:
-  build:
+  build-and-push:
     jobs:
-      - build-job
+      - aws-ecr/build_and_push_image:
+          auth:
+            - aws-cli/setup:
+                role_arn: arn:aws:iam::123456789012
+          repo: 'my-sample-repo'
+          tag: 'latest'
+          region: 'us-west-2'
+          create_repo: true
